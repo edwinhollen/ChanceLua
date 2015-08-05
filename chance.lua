@@ -59,8 +59,8 @@ function chance.pick(self, list)
 end
 
 function chance.pickLineFromFile(self, f)
-	local lines = {}
-	for line in love.filesystem.lines(f) do
+	local lines = {}	
+	for line in io.lines(f) do
 		table.insert(lines, line)
 	end
 	return self:pick(lines)
