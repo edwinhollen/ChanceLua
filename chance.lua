@@ -67,15 +67,23 @@ function chance.pickLineFromFile(self, f)
 end
 
 function chance.male(self)
-	return self:pickLineFromFile("names_male.txt"), self:last()
+	return self:pickLineFromFile("names_male.txt") .. ' ' .. self:last()
 end
 
 function chance.female(self)
-	return self:pickLineFromFile("names_female.txt"), self:last()
+	return self:pickLineFromFile("names_female.txt") .. ' ' .. self:last()
 end
 
 function chance.last(self)
 	return self:pickLineFromFile("names_last.txt")
+end
+
+function chance.name(self)
+	if self:bool() then
+		return self:male()
+	else
+		return self:female()
+	end
 end
 
 function chance.syllable(self)
@@ -124,6 +132,25 @@ end
 
 function chance.street(self)
 	return firstToUpper(self:word()) .. ' ' .. self:pickLineFromFile('street_suffixes.txt')
+end
+
+function chance.address(self)
+	return self:integer(5, 2000) .. ' ' .. self:street()
+end
+
+function chance.phone(self)
+	--- (1)(2)(3) -(4)- (5)(6)(7) -(8)- (9)(10)(11)(12)
+	local str = ''
+	for i=1,12 do
+		local c
+		if i == 4 or i == 8 then
+			c = '-'
+		else
+			c = self:integer(0, 9)
+		end
+		str = str .. c
+	end
+	return str
 end
 
 function chance.ipv4(self)
