@@ -1,8 +1,13 @@
 local chance = {}
+local symbols = {'!','@','#','$','%','^','&','*','(',')'}
+local numbers = {0,1,2,3,4,5,6,7,8,9}
 local letters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}
 local consonants = {'b','c','d','f','g','h','j','k','l','m','n','p','r','s','t','v','w','z'}
 local vowels = {'a','e','i','o','u'}
-
+local names_male = {'Jacob','Michael','Joshua','Matthew','Daniel','Christopher','Andrew','Ethan','Joseph','William','Anthony','David','Alexander','Nicholas','Ryan','Tyler','James','John','Jonathan','Noah','Brandon','Christian','Dylan','Samuel','Benjamin','Nathan','Zachary','Logan','Justin','Gabriel','Jose','Austin','Kevin','Elijah','Caleb','Robert','Thomas','Jordan','Cameron','Jack','Hunter','Jackson','Angel','Isaiah','Evan','Isaac','Luke','Mason','Jason','Jayden'}
+local names_female = {'Emily','Madison','Emma','Olivia','Hannah','Abigail','Isabella','Samantha','Elizabeth','Ashley','Alexis','Sarah','Sophia','Alyssa','Grace','Ava','Taylor','Brianna','Lauren','Chloe','Natalie','Kayla','Jessica','Anna','Victoria','Mia','Hailey','Sydney','Jasmine','Julia','Morgan','Destiny','Rachel','Ella','Kaitlyn','Megan','Katherine','Savannah','Jennifer','Alexandra','Allison','Haley','Maria','Kaylee','Lily','Makayla','Brooke','Nicole','Mackenzie','Addison'}
+local names_last = {'Smith','Johnson','Williams','Jones','Brown','Davis','Miller','Wilson','Moore','Taylor','Anderson','Thomas','Jackson','White','Harris','Martin','Thompson','Garcia','Martinez','Robinson','Clark','Rodriguez','Lewis','Lee','Walker','Hall','Allen','Young','Hernandez','King','Wright','Lopez','Hill','Scott','Green','Adams','Baker','Gonzalez','Nelson','Carter','Mitchell','Perez','Roberts','Turner','Phillips','Campbell','Parker','Evans','Edwards','Collins','Stewart','Sanchez','Morris','Rogers','Reed','Cook','Morgan','Bell','Murphy','Bailey','Rivera','Cooper','Richardson','Cox','Howard','Ward','Torres','Peterson','Gray','Ramirez','James','Watson','Brooks','Kelly','Sanders','Price','Bennett','Wood','Barnes','Ross','Henderson','Coleman','Jenkins','Perry','Powell','Long','Patterson','Hughes','Flores','Washington','Butler','Simmons','Foster','Gonzales','Bryant','Alexander','Russell','Griffin','Diaz','Hayes'}
+local street_suffixes = {'Avenue','Ave','Boulevard','Blvd','Center','Ctr','Circle','Cir','Court','Ct','Drive','Dr','Extension','Ext','Glen','Gln','Grove','Grv','Heights','Hts','Highway','Hwy','Junction','Jct','Key','Key','Lane','Ln','Loop','Manor','Mill','Park','Parkway','Pkwy','Pass','Path','Pike','Place','Pl','Plaza','Plz','Point','Pt','Ridge','Rdg','River','Riv','Road','Rd','Square','Sq','Street','St','Terrace','Ter','Trail','Trl','Tr','Turnpike','Tpke','View','Vw','Way'}
 
 -- Helper functions (local)
 
@@ -33,6 +38,16 @@ local function firstToUpper(str)
 	return str:sub(1, 1):upper()..str:sub(2)
 end
 
+local function joinTables(...)
+	local t = {}
+	for k,v in ipairs({...}) do
+		for ik, iv in ipairs(v) do
+			table.insert(t, iv)
+		end
+	end
+	return t
+end
+
 
 -- Library functions 
 
@@ -48,6 +63,12 @@ function chance.integer(self, a, b)
 		return math.random(a)
 	end
 	return math.random(a, b)
+end
+
+function chance.character(self, alpha)
+	if alpha == nil then alpha = false end
+	if alpha then return self:pick(letters) end
+	return self:pick(joinTables(letters, numbers, symbols))
 end
 
 function chance.bool(self, likelihood)
@@ -73,23 +94,32 @@ function chance.pickLineFromFile(self, f)
 	return self:pick(lines)
 end
 
-function chance.male(self)
-	return self:pickLineFromFile("names_male.txt") .. ' ' .. self:last()
+function chance.male(self, lastName)
+	local n = self:pick(names_male)
+	if lastName then
+		return n .. ' ' .. self:last()
+	end
+	return n
 end
 
-function chance.female(self)
-	return self:pickLineFromFile("names_female.txt") .. ' ' .. self:last()
+function chance.female(self, lastName)
+	local n = self:pick(names_female)
+	if lastName then
+		return n .. ' ' .. self:last()
+	end
+	return n
 end
 
 function chance.last(self)
-	return self:pickLineFromFile("names_last.txt")
+	return self:pick(names_last)
 end
 
-function chance.name(self)
+function chance.name(self, lastName)
+	if lastName == nil then lastName = false end
 	if self:bool() then
-		return self:male()
+		return self:male(lastName)
 	else
-		return self:female()
+		return self:female(lastName)
 	end
 end
 
@@ -138,7 +168,7 @@ function chance.word(self)
 end
 
 function chance.street(self)
-	return firstToUpper(self:word()) .. ' ' .. self:pickLineFromFile('street_suffixes.txt')
+	return firstToUpper(self:word()) .. ' ' .. self:pick(street_suffixes)
 end
 
 function chance.address(self)
@@ -146,7 +176,6 @@ function chance.address(self)
 end
 
 function chance.phone(self)
-	--- (1)(2)(3) -(4)- (5)(6)(7) -(8)- (9)(10)(11)(12)
 	local str = ''
 	for i=1,12 do
 		local c
