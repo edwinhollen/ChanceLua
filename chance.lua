@@ -51,6 +51,13 @@ function chance.integer(self, a, b)
 end
 
 function chance.bool(self, likelihood)
+	likelihood = likelihood or 50
+	if likelihood <= 0 then
+		return 0
+	end
+	if likelihood < 1 then
+		likelihood = likelihood * 100
+	end
 	return chance.integer() < (likelihood or 50)
 end
 
@@ -174,17 +181,24 @@ function chance.ipv6(self)
 end
 
 function chance.ip(self)
-	return 
+	if self:bool() then
+		return self:ipv4()
+	else
+		return self:ipv6()
+	end
 end
 
 function chance.hash(self, length)
-	local str = ''
-	for i=1, (length or 8) do
-		if self:bool() then
-			str = str .. self:pick({'a','b','c','d','e','f'})
-		else
-			str = str .. self:integer(0, 9)
-		end
+	local pool = {'a','b','c','d','e','f', 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	return self:string((length or 8), pool)
+end
+
+function chance.string(self, length, pool)
+	length = length or 16
+	pool = pool or letters
+	str = ''
+	for i=1, length do
+		str = str .. self:pick(pool)
 	end
 	return str
 end
