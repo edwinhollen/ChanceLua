@@ -88,12 +88,14 @@ Returns a random first name as a string, male or female. Format is `first last`.
 **male**
 	
 	chance:male()
+	chance:male(true)	-- with a last name
 
 Returns a random male first name. Optionally return with a last name.
 
 **female**
 
 	chance:female()
+	chance:female(true)	-- with a last name
 
 Returns a random female first name. Optionally return with a last name.
 
