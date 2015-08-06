@@ -225,7 +225,7 @@ end
 function chance.string(self, length, pool)
 	length = length or 16
 	pool = pool or letters
-	str = ''
+	local str = ''
 	for i=1, length do
 		str = str .. self:pick(pool)
 	end
