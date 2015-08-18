@@ -1,6 +1,12 @@
 # ChanceLua
 
-A random _____ generator written in pure Lua. Based on the glorious Javascript library, [ChanceJS](https://github.com/victorquinn/chancejs). 
+A random "everything" generator, written in pure Lua. ChanceLua is based on the lovely Javascript library, [ChanceJS](http://chancejs.com/). 
+
+## At a glance
+
+ChanceLua can generate integers, characters (even whole words), pick a random item from a list, output a boolean given a likelihood. It can also generate names, addresses, telephone numbers, IP addresses (v4 and v6), colors, and more!
+
+ChanceLua is licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Usage
 
@@ -8,7 +14,7 @@ A random _____ generator written in pure Lua. Based on the glorious Javascript l
 
 2. Add a require: `local chance = require('chance')`
 
-3. Use it! Be sure to call functions with a colon. See examples below.
+3. Use it! Be sure to call functions with a colon. See examples and documentation below.
 
 ### Examples
 
@@ -21,6 +27,8 @@ A random _____ generator written in pure Lua. Based on the glorious Javascript l
 
 	local coinFlip = chance:bool()		-- true
 	local diceRoll = chance:integer(1,6)-- 2
+
+---
 
 ## Functions
 
