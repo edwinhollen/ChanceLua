@@ -232,4 +232,22 @@ function chance.string(self, length, pool)
 	return str
 end
 
+function chance.rgba(self)
+	return self:integer(0, 255), self:integer(0, 255), self:integer(0, 255), self:integer(0, 255)
+end
+
+function chance.rgb(self)
+	local r, g, b = self:rgba()
+	return r, g, b
+end
+
+function chance.hsla(self)
+	return self:integer(0, 360), ('%i%%'):format(self:integer(0, 100)), ('%i%%'):format(self:integer(0, 100)), self:integer(0, 100) / 100
+end
+
+function chance.hsl(self)
+	local h, s, l = self:hsla()
+	return h, s, l
+end
+
 return chance

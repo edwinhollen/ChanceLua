@@ -181,3 +181,32 @@ Returns a random IPv6 address.
 
 Returns a random hash. Can optionally specify the number of characters.
 
+### Color
+
+**hsl**
+
+	local h, s, l = chance:hsl()
+	print(h,s,l) 	--	253	19%	34%
+
+Returns *(multiple values)* a random color with HSL values.
+
+**hsla**
+	
+	local h, s, l, a = chance:hsla()
+	print(h,s,l,a)	--	272	23%	37%	0.84
+
+Returns *(multiple values)* a random color with HSLa values.
+
+**rgb**
+
+	local r, g, b = chance:rgb()
+	print(r,g,b)	--	148	71	253
+
+Returns *(multiple values)* a random color with RGB values.
+
+**rgba**
+
+	local r, g, b, a = chance:rgba()
+	print(r,g,b,a)	--	198	91	109	103
+
+Returns *(multiple values)* a random color with RGBa values.
