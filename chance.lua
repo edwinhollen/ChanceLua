@@ -86,6 +86,23 @@ function chance.pick(self, list)
 	return list[math.random(1, #list)]
 end
 
+function chance.shuffle(self, list)
+	local shuffled = {}
+	-- duplicate the list
+	for k,v in ipairs(list) do
+		shuffled[k] = v
+	end
+	-- perform a Fisher-Yates shuffle
+	for i=1, #shuffled do
+		local j = self:integer(i, #list)
+		local tmp_i = shuffled[i]
+		local tmp_j = shuffled[j]
+		shuffled[j] = tmp_i
+		shuffled[i] = tmp_j
+	end
+	return shuffled
+end
+
 function chance.pickLineFromFile(self, f)
 	local lines = {}	
 	for line in io.lines(f) do

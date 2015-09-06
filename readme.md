@@ -75,12 +75,19 @@ Returns a random character. Can optionally specify to only return a letter (alph
 
 Returns a random string. By default, returns a 16 character string of letters. Optionally specify a length or a pool of characters.
 
+### Lists
+
 **pick**
 
 	chance:pick({'apple', 'banana', 'cabbage'})
 
-Returns a random item from a table. 
+Returns a random item from a table.
 
+**shuffle**
+
+	chance:shuffle({'a', 'b', 'c', 'd'})	-- returns {'c','a','b','d'}
+
+Returns a new list. Shuffles the values (like shuffling a deck of cards). Does not modify the provided list.
 
 ### Names
 
