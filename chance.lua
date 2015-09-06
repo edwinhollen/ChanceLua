@@ -79,7 +79,7 @@ function chance.bool(self, likelihood)
 	if likelihood < 1 then
 		likelihood = likelihood * 100
 	end
-	return chance.integer() < (likelihood or 50)
+	return chance.integer(0, 100) < (likelihood or 50)
 end
 
 function chance.pick(self, list)
