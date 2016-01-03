@@ -46,8 +46,8 @@ Running `chance:seed()` (with no arguments) will set the seed to the current tim
 
 **bool**
 
-	chance:bool()
-	chance:bool(22) 	-- 22% likelihood
+	chance:bool()     -- 50% likelihood
+	chance:bool(0.97) -- 97% likelihood
 	chance:bool(1/8)	-- 1/8 = 12.5% likelihood
 
 Returns a random value `true` or `false`. Default likelihood is 50% (like a coin flip). 
