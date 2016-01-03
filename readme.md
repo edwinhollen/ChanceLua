@@ -32,23 +32,23 @@ ChanceLua is licensed under the [MIT license](http://opensource.org/licenses/MIT
 
 ## Functions
 
-[Seed](#Seed)
+[Seed](#seed)
 
-[Basics](#Basics)
+[Basics](#basics)
 
-[Lists](#Lists)
+[Lists](#lists)
 
-[Names](#Names)
+[Names](#names)
 
-[Words](#Words)
+[Words](#words)
 
-[Locations](#Locations)
+[Locations](#locations)
 
-[Technology](#Technology)
+[Technology](#technology)
 
-[Colors](#Colors)
+[Colors](#colors)
 
-[Miscellaneous](#Miscellaneous)
+[Miscellaneous](#miscellaneous)
 
 ### Seed
 	
