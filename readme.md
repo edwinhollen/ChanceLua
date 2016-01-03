@@ -225,3 +225,13 @@ Returns *(multiple values)* a random color with RGB values.
 	print(r,g,b,a)	--	198	91	109	103
 
 Returns *(multiple values)* a random color with RGBa values.
+
+### Miscellaneous
+
+**pickLineFromFile**
+
+    local randomItem = chance:pickLineFromFile('items.txt')
+    
+Returns a random line (as a string) from a text file.
+
+*Note: I have only tested this with .txt files (UTF-8).*
