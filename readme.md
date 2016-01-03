@@ -32,6 +32,24 @@ ChanceLua is licensed under the [MIT license](http://opensource.org/licenses/MIT
 
 ## Functions
 
+[Seed][]
+
+[Basics][]
+
+[Lists][]
+
+[Names][]
+
+[Words][]
+
+[Locations][]
+
+[Technology][]
+
+[Colors][]
+
+[Miscellaneous][]
+
 ### Seed
 	
 	chance:seed()
@@ -196,7 +214,7 @@ Returns a random IPv6 address.
 
 Returns a random hash. Can optionally specify the number of characters.
 
-### Color
+### Colors
 
 **hsl**
 
